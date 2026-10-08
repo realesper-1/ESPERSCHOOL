@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -149,14 +150,11 @@ body kbd{transition:transform .15s,color .15s,border-color .15s}body kbd:hover{t
 .thmeter u{position:absolute;top:-4px;bottom:-4px;width:3px;background:#fff;border-radius:2px;box-shadow:0 0 6px #fff8;left:0;transition:left .2s}
 #thB{font-size:18px;color:var(--amber);transition:opacity .08s,transform .12s}#thFin{width:100%;margin-top:var(--g)}
 
-#authGate{position:fixed;inset:0;z-index:10000;display:flex;pointer-events:auto;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 45%,#18252dcc,#040608f8 70%);backdrop-filter:blur(12px)}
-.authGateCard{width:min(430px,92vw);padding:24px;border:1px solid #ffffff20;border-radius:18px;background:linear-gradient(180deg,#182128f5,#090d11f8);box-shadow:0 24px 80px #000c;pointer-events:auto;position:relative;z-index:10001}.authLogo{font:900 26px var(--mono);letter-spacing:.05em;margin-bottom:8px}.authLogo b{color:var(--amber)}#authTabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:12px 0}#authTabs button{background:#172027;color:#aebbc1;border:1px solid #ffffff18;padding:9px;border-radius:8px;font-weight:900}#authTabs button.on{background:#ffb02e;color:#2a1a00}#authGate input{width:100%;box-sizing:border-box;margin:5px 0;padding:12px;border-radius:8px;border:1px solid #ffffff20;background:#0a0f13;color:#fff;font:700 13px var(--mono)}
 #authGuestBtn{width:100%;margin-top:8px;background:#172027;color:#dce7eb;border:1px solid #ffffff18}
 #leaveConfirm{position:fixed;inset:0;z-index:11000;display:none;align-items:center;justify-content:center;background:#0009;backdrop-filter:blur(7px);pointer-events:auto}
 .leaveCard{width:min(420px,90vw);padding:22px;border:1px solid #ffffff20;border-radius:16px;background:linear-gradient(180deg,#182128,#090d11);box-shadow:0 24px 80px #000d;text-align:center}
 .leaveCard h2{margin:0 0 8px;font:900 20px var(--mono);letter-spacing:.05em}.leaveCard p{margin:0 0 16px;color:#9eabb2;font:700 11px/1.5 var(--mono)}
-.leaveBtns{display:grid;grid-template-columns:1fr 1fr;gap:8px}.leaveBtns button{padding:11px;font-weight:900}.leaveBtns #leaveYes{background:#d94a3e;color:#fff}.leaveBtns #leaveNo{background:#172027;color:#dce7eb}#authBtn{width:100%;margin-top:7px}#authError{min-height:18px;color:#ff5b52;font:800 11px var(--mono);margin-top:7px}#authHint{font:700 9px var(--mono);color:#71818a;margin-top:4px}
-#accountStrip{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:8px 0 10px;font:900 10px var(--mono);letter-spacing:.08em;color:#dbe4e8}#accountStrip span{padding:6px 8px;border:1px solid #ffffff12;background:#0b1116cc;border-radius:7px}#accountStrip span:nth-child(2){color:#ffcf5a}#logoutBtn{margin-left:auto;padding:6px 9px;font-size:10px}
+.leaveBtns{display:grid;grid-template-columns:1fr 1fr;gap:8px}.leaveBtns button{padding:11px;font-weight:900}.leaveBtns #leaveYes{background:#d94a3e;color:#fff}.leaveBtns #leaveNo{background:#172027;color:#dce7eb}#accountStrip{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:8px 0 10px;font:900 10px var(--mono);letter-spacing:.08em;color:#dbe4e8}#accountStrip span{padding:6px 8px;border:1px solid #ffffff12;background:#0b1116cc;border-radius:7px}#accountStrip span:nth-child(2){color:#ffcf5a}
 .shopHead,.skillHead{display:flex;justify-content:space-between;align-items:center;gap:10px;font:900 10px var(--mono);letter-spacing:.12em;color:#dfe8ec;margin-bottom:7px}.shopHead span,.skillHead span{font-size:8px;color:#72828b;text-align:right}.skillHead button{padding:4px 7px;font-size:9px}
 #shopFilters{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px}#shopFilters button{padding:5px 7px;font-size:9px;background:#151d22;color:#91a0a8;border:1px solid #ffffff12;border-radius:6px}#shopFilters button.on{background:#ffb02e;color:#201600}
 #partsGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;max-height:205px;overflow:auto;padding-right:2px}.partCard{display:grid;grid-template-columns:1fr auto;gap:3px;padding:7px;border:1px solid #ffffff12;border-radius:7px;background:#0a1014d9}.partCard .pn{font:900 10px var(--mono)}.partCard .ps{font:700 8px var(--mono);color:#82929a}.partCard button{grid-row:1/3;align-self:center;padding:6px 7px;font-size:8px}.partCard .up{color:#57e3c6}.partCard .cost{color:#ffcf5a}
@@ -166,7 +164,6 @@ body kbd{transition:transform .15s,color .15s,border-color .15s}body kbd:hover{t
 @media(max-width:700px){#partsGrid{max-height:160px}.partCard{grid-template-columns:1fr}.partCard button{grid-row:auto}.lbrow{grid-template-columns:22px 1fr 54px 54px}.skillHead span,.shopHead span{display:none}}
 </style></head><body>
 
-<div id="authGate"><div class="authGateCard"><div class="authLogo">ROAD <b>RACER</b> 3D</div><h2 id="authTitle">LOGIN</h2><p id="authSub">Sign in to save your garage, progress, and leaderboard score.</p><div id="authTabs"><button id="authLoginTab" class="on" type="button">LOGIN</button><button id="authRegisterTab" type="button">REGISTER</button></div><input id="authUser" maxlength="16" autocomplete="username" placeholder="Username"><input id="authPass" maxlength="72" type="password" autocomplete="current-password" placeholder="Password"><input id="authPassConfirm" maxlength="72" type="password" autocomplete="new-password" placeholder="Confirm password" style="display:none"><button id="authBtn" type="button">LOGIN</button><button id="authGuestBtn" type="button">CONTINUE AS GUEST</button><div id="authError"></div><div id="authHint">Username: 3–16 letters, numbers, or underscore · Password: 8+ characters</div></div></div>
 <div id="leaveConfirm"><div class="leaveCard"><h2>ARE YOU SURE YOU WANT TO LEAVE?</h2><p>Your current ride will end and you will return to the main menu.</p><div class="leaveBtns"><button id="leaveYes" type="button">YES, LEAVE</button><button id="leaveNo" type="button">NO, STAY</button></div></div></div>
 
 <div id="settingsPanel" aria-hidden="true"><div class="sp"><div class="sh"><b>SETTINGS</b><span class="ms" style="margin:0">ROAD RACER 3D</span></div>
@@ -188,7 +185,7 @@ body kbd{transition:transform .15s,color .15s,border-color .15s}body kbd:hover{t
 <div class="mbox" id="setupPanel">
   <div class="mt">ROAD RACER 3D</div>
   <div class="ms">Build your fixed-gear · live 3D showroom preview</div>
-  <div id="accountStrip"><span id="accountName">GUEST</span><span id="accountMoney">$0</span><span id="accountSkill">SKILL 0</span><button id="logoutBtn" type="button">LOG OUT</button></div>
+  <div id="accountStrip"><span id="accountName">GUEST</span><span id="accountMoney">$0</span><span id="accountSkill">SKILL 0</span></div>
   <div id="bikeInfoBar"><div class="biTop"><span id="biName">ROAD RACER</span><span id="biWeight">WEIGHT 8.4 KG</span></div><div class="biStats"><div><b id="biSpeed">92</b><small>TOP SPEED</small></div><div><b id="biAero">88</b><small>AERONESS</small></div><div><b id="biAccel">84</b><small>ACCEL</small></div><div><b id="biHandling">86</b><small>HANDLING</small></div></div><div class="biHint">SELECT PARTS BELOW · 3D BIKE STAYS CENTER STAGE</div></div>
   <div id="mload"><div class="bar"><i id="bari"></i></div><div class="ms">Loading…</div></div>
   <div id="bikeEdit" style="display:block">
@@ -216,63 +213,43 @@ body kbd{transition:transform .15s,color .15s,border-color .15s}body kbd:hover{t
 <div id="ui"><div id="uiL"></div><div id="uiC"></div><div id="uiR"></div><div id="uiB"><div id="uiBL"></div><div id="uiBC"></div><div id="uiBR"></div></div></div>
 <script>(function(){var g=function(i){return document.getElementById(i)},m=function(z,a){a.forEach(function(i){var e=g(i);if(e)g(z).appendChild(e)})};m("uiL",["hud","brand","roster"]);m("uiC",["race","trainHud","bikes"]);m("uiR",["mapc","lb","mpl"]);m("uiBL",["help"]);m("uiBC",["trainPanel"]);m("uiBR",["ctl"])})();</script>
 <script>
-let PLAYER_NICK='';window.PLAYER_PROFILE=null;let AUTH_MODE='login';let GUEST_MODE=false;
-const LOCAL_AUTH_KEY='rr3dStandaloneAccountsV2',LOCAL_SESSION_KEY='rr3dStandaloneSessionV2';
-function hideAuth(){const g=$("authGate");if(g){g.style.display='none';g.style.pointerEvents='none'}}
-function showAuth(){const g=$("authGate");if(g){g.style.display='flex';g.style.pointerEvents='auto';g.style.zIndex='10000'}}
-function authError(e){const x=$("authError");if(x)x.textContent=e?(e.message||String(e)):''}
-function readAccounts(){try{return JSON.parse(localStorage.getItem(LOCAL_AUTH_KEY)||'{}')}catch(e){return {}}}
-function writeAccounts(a){localStorage.setItem(LOCAL_AUTH_KEY,JSON.stringify(a))}
-function cleanName(v){return v.trim().toLowerCase()}
-function validName(v){return /^[A-Za-z0-9_]{3,16}$/.test(v)}
-async function hashPassword(password,salt){const enc=new TextEncoder();const base=await crypto.subtle.importKey('raw',enc.encode(password),'PBKDF2',false,['deriveBits']);const bits=await crypto.subtle.deriveBits({name:'PBKDF2',salt:enc.encode(salt),iterations:120000,hash:'SHA-256'},base,256);return [...new Uint8Array(bits)].map(x=>x.toString(16).padStart(2,'0')).join('')}
-function makeGuestProfile(){return {username:'GUEST',money:0,skillPoints:0,wins:0,score:0,skills:{},ownedParts:[],ownedBikes:['default'],equipped:{}}}
+let PLAYER_NICK='GUEST';
+window.PLAYER_PROFILE=null;
+const LOCAL_PROFILE_KEY='rr3dStandaloneGuestProfileV1';
+function makeGuestProfile(){return {username:'GUEST',money:500,skillPoints:0,wins:0,score:0,skills:{},ownedParts:[],ownedBikes:['default'],equipped:{}}}
+function readGuestProfile(){try{const p=JSON.parse(localStorage.getItem(LOCAL_PROFILE_KEY)||'null');if(!p)return makeGuestProfile();p.username='GUEST';p.skills=p.skills||{};p.equipped=p.equipped||{};p.ownedParts=p.ownedParts||[];p.ownedBikes=p.ownedBikes||['default'];p.money=Number(p.money??500);p.skillPoints=Number(p.skillPoints||0);p.wins=Number(p.wins||0);p.score=Number(p.score||0);return p}catch(e){return makeGuestProfile()}}
+function saveGuestProfile(p){window.PLAYER_PROFILE=p;try{localStorage.setItem(LOCAL_PROFILE_KEY,JSON.stringify(p))}catch(e){}}
+function renderProfile(){const p=window.PLAYER_PROFILE||readGuestProfile();PLAYER_NICK='GUEST';const n=$("accountName"),m=$("accountMoney"),s=$("accountSkill");if(n)n.textContent='GUEST';if(m)m.textContent='$'+Math.floor(Number(p.money||0));if(s)s.textContent='SKILL '+Object.values(p.skills||{}).reduce((a,v)=>a+Number(v||0),0);if(typeof updateSkillTree==='function')updateSkillTree();if(typeof renderParts==='function')renderParts('all');if(typeof updateBikeInfo==='function')updateBikeInfo()}
 async function api(path,opt={}){
-  const body=opt.body?JSON.parse(opt.body):{};
-  const key=localStorage.getItem(LOCAL_SESSION_KEY),accounts=readAccounts();
-  const me=()=>{if(GUEST_MODE)return window.PLAYER_PROFILE||makeGuestProfile();if(!key||!accounts[key])throw new Error('Please log in first.');const p=accounts[key];p.skills=p.skills||{};p.equipped=p.equipped||{};p.ownedParts=p.ownedParts||[];p.ownedBikes=p.ownedBikes||['default'];return p};
-  if(path==='/api/auth/me')return {user:GUEST_MODE?makeGuestProfile():(key&&accounts[key]?me():null)};
-  if(path==='/api/auth/logout'){localStorage.removeItem(LOCAL_SESSION_KEY);GUEST_MODE=false;return {ok:true}};
-  if(path==='/api/game/profile')return {user:me()};
+  const body=opt.body?JSON.parse(opt.body):{},p=window.PLAYER_PROFILE||readGuestProfile();
+  if(path==='/api/auth/me')return {user:p};
+  if(path==='/api/auth/logout')return {ok:true};
+  if(path==='/api/game/profile')return {user:p};
   if(path==='/api/game/skill'){
-    const p=me(),k=body.skill,cost=(k==='aero'||k==='speed')?2:1,lv=Number(p.skills[k]||0);
-    if(GUEST_MODE)throw new Error('Create an account to save skill upgrades.');
+    const k=body.skill,cost=(k==='aero'||k==='speed')?2:1,lv=Number(p.skills[k]||0);
     if(!['power','stamina','climb','cadence','aero','speed'].includes(k))throw new Error('Unknown skill.');
-    if(lv>=5)throw new Error('Skill already maxed.'); if(Number(p.skillPoints||0)<cost)throw new Error('Not enough skill points.');
-    p.skillPoints-=cost;p.skills[k]=lv+1;writeAccounts(accounts);return {user:p};
+    if(lv>=5)throw new Error('Skill already maxed.');if(Number(p.skillPoints||0)<cost)throw new Error('Not enough skill points.');
+    p.skillPoints-=cost;p.skills[k]=lv+1;saveGuestProfile(p);return {user:p};
   }
-  if(path==='/api/shop/purchase'||path==='/api/shop/equip'||path==='/api/shop/buy-bike'){if(GUEST_MODE)throw new Error('Create an account to buy or equip bikes and parts.');}
   if(path==='/api/shop/purchase'){
-    const p=me(),x=PARTS.find(q=>q.id===body.itemId);if(!x)throw new Error('Part not found.');
-    if((p.ownedParts||[]).includes(x.id))throw new Error('Already owned.');if(Number(p.money||0)<x.cost)throw new Error('Not enough money.');
-    p.money-=x.cost;p.ownedParts.push(x.id);writeAccounts(accounts);return {user:p};
+    const x=PARTS.find(q=>q.id===body.itemId);if(!x)throw new Error('Part not found.');if((p.ownedParts||[]).includes(x.id))throw new Error('Already owned.');if(Number(p.money||0)<x.cost)throw new Error('Not enough money.');
+    p.money-=x.cost;p.ownedParts.push(x.id);saveGuestProfile(p);return {user:p};
   }
   if(path==='/api/shop/equip'){
-    const p=me(),x=PARTS.find(q=>q.id===body.itemId);if(!x||!p.ownedParts.includes(x.id))throw new Error('Part is not owned.');
-    p.equipped=p.equipped||{};p.equipped[x.cat]=x.id;writeAccounts(accounts);return {user:p};
+    const x=PARTS.find(q=>q.id===body.itemId);if(!x||!p.ownedParts.includes(x.id))throw new Error('Part is not owned.');p.equipped=p.equipped||{};p.equipped[x.cat]=x.id;saveGuestProfile(p);return {user:p};
   }
   if(path==='/api/shop/buy-bike'){
-    const p=me(),i=Number(body.index),B=BIKES[i];if(!B)throw new Error('Bike not found.');p.ownedBikes=p.ownedBikes||[];if(p.ownedBikes.includes(i))return {user:p};if(Number(p.money||0)<Number(B.cost||0))throw new Error('Not enough money.');p.money-=Number(B.cost||0);p.ownedBikes.push(i);writeAccounts(accounts);return {user:p};
+    const i=Number(body.index),B=BIKES[i];if(!B)throw new Error('Bike not found.');p.ownedBikes=p.ownedBikes||['default'];if(p.ownedBikes.includes(i))return {user:p};if(Number(p.money||0)<Number(B.cost||0))throw new Error('Not enough money.');p.money-=Number(B.cost||0);p.ownedBikes.push(i);saveGuestProfile(p);return {user:p};
   }
   if(path==='/api/game/complete'){
-    if(GUEST_MODE)return {user:window.PLAYER_PROFILE||makeGuestProfile(),reward:0};
-    const p=me(),gain=Math.max(25,Math.min(5000,Math.floor(Number(body.score||0)/10)+Math.max(0,5-Number(body.place||5))*50));p.money=Number(p.money||0)+gain;if(Number(body.place||99)<=1){p.wins=Number(p.wins||0)+1;p.skillPoints=Number(p.skillPoints||0)+1}p.score=Math.max(Number(p.score||0),Math.floor(Number(body.score||0)));writeAccounts(accounts);return {user:p,reward:gain};
+    const gain=Math.max(25,Math.min(5000,Math.floor(Number(body.score||0)/10)+Math.max(0,5-Number(body.place||5))*50));p.money=Number(p.money||0)+gain;if(Number(body.place||99)<=1){p.wins=Number(p.wins||0)+1;p.skillPoints=Number(p.skillPoints||0)+1}p.score=Math.max(Number(p.score||0),Math.floor(Number(body.score||0)));saveGuestProfile(p);return {user:p,reward:gain};
   }
-  if(path.startsWith('/api/leaderboard')){const rows=Object.values(accounts).sort((a,b)=>(b.score||0)-(a.score||0)).slice(0,50).map(p=>({username:p.username,score:p.score||0,wins:p.wins||0}));return {rows};}
-  throw new Error('Standalone mode: unsupported request.');
+  if(path.startsWith('/api/leaderboard'))return {rows:[{username:'GUEST',score:p.score||0,wins:p.wins||0}]};
+  throw new Error('Unsupported request.');
 }
-function randomSalt(){const a=new Uint8Array(16);crypto.getRandomValues(a);return [...a].map(x=>x.toString(16).padStart(2,'0')).join('')}
-function getLocalProfile(){try{const u=localStorage.getItem(LOCAL_SESSION_KEY);if(!u)return null;const a=readAccounts(),p=a[u];return p?{username:p.username,money:p.money,skillPoints:p.skillPoints,wins:p.wins,score:p.score,skills:p.skills||{},ownedParts:p.ownedParts||[],ownedBikes:p.ownedBikes||['default'],equipped:p.equipped||{}}:null}catch(e){return null}}
-async function localRegister(username,password){if(!validName(username))throw new Error('Username must be 3–16 letters, numbers, or underscore.');if(password.length<8)throw new Error('Password must be at least 8 characters.');const key=cleanName(username),a=readAccounts();if(a[key])throw new Error('That username is already taken.');const salt=randomSalt(),hash=await hashPassword(password,salt);a[key]={username,salt,hash,money:500,skillPoints:0,wins:0,score:0,skills:{},ownedParts:[],ownedBikes:['default'],equipped:{}};writeAccounts(a);localStorage.setItem(LOCAL_SESSION_KEY,key);return getLocalProfile()}
-async function localLogin(username,password){const key=cleanName(username),a=readAccounts(),p=a[key];if(!p)throw new Error('Account not found.');const hash=await hashPassword(password,p.salt);if(hash!==p.hash)throw new Error('Incorrect password.');localStorage.setItem(LOCAL_SESSION_KEY,key);GUEST_MODE=false;return getLocalProfile()}
-function renderProfile(){const p=window.PLAYER_PROFILE||makeGuestProfile();PLAYER_NICK=p.username||'GUEST';const n=$("accountName"),m=$("accountMoney"),s=$("accountSkill");if(n)n.textContent=PLAYER_NICK;if(m)m.textContent='$'+Math.floor(Number(p.money||0));if(s)s.textContent='SKILL '+Object.values(p.skills||{}).reduce((a,v)=>a+Number(v||0),0);updateSkillTree();renderParts('all');updateBikeInfo()}
-async function authSubmit(){const u=$("authUser").value.trim(),pw=$("authPass").value,confirm=$("authPassConfirm").value,btn=$("authBtn");if(!u||!pw){authError(new Error('Enter username and password.'));return}if(AUTH_MODE==='register'){if(pw.length<8){authError(new Error('Password must be at least 8 characters.'));return}if(!confirm){authError(new Error('Confirm your password.'));return}if(pw!==confirm){authError(new Error('Passwords do not match.'));return}}btn.disabled=true;btn.textContent=AUTH_MODE==='login'?'SIGNING IN…':'CREATING…';authError('');try{const p=AUTH_MODE==='login'?await localLogin(u,pw):await localRegister(u,pw);GUEST_MODE=false;window.PLAYER_PROFILE=p;renderProfile();hideAuth();loadLeaderboard()}catch(e){authError(e)}finally{btn.disabled=false;btn.textContent=AUTH_MODE==='login'?'LOGIN':'CREATE ACCOUNT'}}
-function setAuthMode(mode){AUTH_MODE=mode;$("authTitle").textContent=mode==='login'?'LOGIN':'CREATE ACCOUNT';$("authSub").textContent=mode==='login'?'Sign in to save your garage, progress, and leaderboard score.':'Create your account to save bikes, parts, skills, money, and race results.';$("authBtn").textContent=mode==='login'?'LOGIN':'CREATE ACCOUNT';$("authLoginTab").classList.toggle('on',mode==='login');$("authRegisterTab").classList.toggle('on',mode==='register');$("authPass").autocomplete=mode==='login'?'current-password':'new-password';$("authPassConfirm").style.display=mode==='register'?'block':'none';$("authPassConfirm").value='';authError('')}
-$("authLoginTab").addEventListener('click',()=>setAuthMode('login'));$("authRegisterTab").addEventListener('click',()=>setAuthMode('register'));$("authBtn").addEventListener('click',authSubmit);$("authGuestBtn").addEventListener('click',()=>{GUEST_MODE=true;localStorage.removeItem(LOCAL_SESSION_KEY);window.PLAYER_PROFILE=makeGuestProfile();renderProfile();hideAuth();loadLeaderboard()});['authUser','authPass','authPassConfirm'].forEach(id=>$(id).addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();authSubmit()}}));
-$("logoutBtn").onclick=()=>{localStorage.removeItem(LOCAL_SESSION_KEY);GUEST_MODE=false;window.PLAYER_PROFILE=null;showAuth();setAuthMode('login');$("authPass").value='';$("authPassConfirm").value='';$("authUser").value=''};
-async function loadLeaderboard(){const box=$('globalLB');if(!box)return;const a=readAccounts();const rows=Object.values(a).sort((x,y)=>(y.score||0)-(x.score||0)).slice(0,25);box.innerHTML=rows.map((r,i)=>'<div class="lbrow '+(r.username===PLAYER_NICK?'me':'')+'"><span>#'+(i+1)+'</span><span>'+String(r.username).replace(/[<>]/g,'')+'</span><span class="t">'+Math.floor(Number(r.score||0))+'</span><span class="t">'+(r.wins||0)+' W</span></div>').join('')||'<div>No ranked runs yet.</div>'}
+async function loadLeaderboard(){const box=$('globalLB');if(!box)return;const p=window.PLAYER_PROFILE||readGuestProfile();box.innerHTML='<div class="lbrow me"><span>#1</span><span>GUEST</span><span class="t">'+Math.floor(Number(p.score||0))+'</span><span class="t">'+(p.wins||0)+' W</span></div>'}
 $('refreshLB').onclick=loadLeaderboard;
-const savedProfile=getLocalProfile();if(savedProfile){GUEST_MODE=false;window.PLAYER_PROFILE=savedProfile;renderProfile();hideAuth();loadLeaderboard()}else{showAuth();setAuthMode('login')}
+window.PLAYER_PROFILE=readGuestProfile();
 (()=>{"use strict";
 const $=i=>document.getElementById(i),canvas=$("gl");
 function fail(e){$("error").style.display="block";$("errText").textContent=String(e&&e.message||e)}
