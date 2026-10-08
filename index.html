@@ -99,7 +99,7 @@ body #lcode{font:900 44px var(--mono);letter-spacing:.2em;color:var(--amber)}bod
 #nicknameGate input{box-sizing:border-box;width:100%;padding:12px var(--pad);border-radius:10px;border:1px solid var(--line);background:#0b0f12;color:var(--ink);font:700 16px var(--mono);outline:none}#nicknameGate input:focus{border-color:var(--amber)}
 #nicknameGate button{width:100%;margin-top:var(--g);padding:12px;font-size:14px;background:linear-gradient(#ffc24a,#f59a0c);color:#201300;border-color:#ffd27a}#nicknameError{min-height:18px;margin-top:var(--g);color:#ff7a6b;font:700 12px var(--mono)}
 #error{z-index:40}
-#settingsBtn{position:absolute;right:calc(var(--edge) * 2);top:calc(var(--edge) * 2);pointer-events:auto;z-index:5;padding:9px 13px;background:#12191eee;border:1px solid #ffffff24;color:#e6edf0}
+#settingsBtn{position:fixed;left:52%;top:18px;right:auto;transform:translateX(-50%);pointer-events:auto;z-index:100;padding:9px 13px;background:#12191eee;border:1px solid #ffffff24;color:#e6edf0}
 #settingsPanel{display:none;position:fixed;inset:0;z-index:80;align-items:center;justify-content:center;background:#030609b8;backdrop-filter:blur(8px);pointer-events:auto}
 #settingsPanel .sp{width:min(560px,92vw);max-height:86vh;overflow:auto;padding:18px;border:1px solid #46525b;border-radius:18px;background:linear-gradient(180deg,#1d2328f7,#0b0f12fa);box-shadow:0 24px 70px #000d}
 #settingsPanel .sh{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
@@ -113,7 +113,7 @@ body #lcode{font:900 44px var(--mono);letter-spacing:.2em;color:var(--amber)}bod
 @media(max-width:800px){#ui{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:auto auto minmax(0,1fr) auto}#uiL{grid-area:1/1}#uiR{grid-area:1/2}#uiC{grid-area:2/1/3/3}#uiB{grid-area:4/1/5/3}#help{display:none}#hud{flex-wrap:wrap}.big{font-size:32px}#lb,#mpl{width:100%;max-width:200px}#ctl{width:100%;grid-template-columns:repeat(5,1fr)}#uiBR{width:100%}#msg{font-size:clamp(36px,12vw,56px)}}
 
 /* ===== ROAD RACER 3D: menu frame, tweens, training ===== */
-body #menu{flex-direction:row;justify-content:flex-end;align-items:stretch;padding:var(--edge);gap:var(--g);background:linear-gradient(90deg,#05080c99 0,#05080c00 32%,#05080c00 56%,#05080cdd 100%);pointer-events:none}
+body #menu{flex-direction:row;justify-content:flex-end;align-items:stretch;padding:var(--edge);gap:var(--g);background:linear-gradient(90deg,#05080c72 0,#05080c10 30%,#05080c14 58%,#05080cde 100%);pointer-events:none}
 #mTitle{position:absolute;left:calc(var(--edge) * 2);top:calc(var(--edge) * 2);font:900 clamp(30px,5.2vw,64px)/1 var(--mono);letter-spacing:.05em;color:var(--ink);text-shadow:0 3px 0 #000a;pointer-events:none}
 #mTitle b{color:var(--amber)}#mTitle::after{content:"";display:block;height:6px;width:120px;margin-top:var(--pad);border-radius:3px;background:var(--hz)}
 #mTitle small{display:block;margin-top:var(--g);font:800 11px var(--mono);letter-spacing:.22em;color:var(--mut)}#mTitle .musb{pointer-events:auto;margin-top:var(--pad);position:relative;z-index:1}
@@ -135,6 +135,10 @@ body kbd{transition:transform .15s,color .15s,border-color .15s}body kbd:hover{t
 #menu:before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 42% 52%,#ffb02016 0,transparent 26%),linear-gradient(115deg,transparent 0 44%,#ffb02009 44.2% 44.5%,transparent 44.7% 100%);animation:menuDrift 9s ease-in-out infinite alternate}
 @keyframes menuDrift{from{transform:translateX(-1.5%) scale(1)}to{transform:translateX(1.5%) scale(1.02)}}
 #setupPanel{z-index:2}
+#mload{display:none!important}
+#menu{overflow:hidden}
+#menu:after{content:"";position:absolute;left:20%;right:29%;top:18%;bottom:8%;pointer-events:none;background:radial-gradient(ellipse at center,rgba(255,176,32,.12),rgba(255,176,32,.025) 32%,transparent 68%);z-index:0}
+#menu > *{position:relative;z-index:1}
 #bikeInfoBar{margin:10px 0 8px;padding:10px;border:1px solid #46525b;border-radius:12px;background:linear-gradient(135deg,#161d22e8,#080b0de8);box-shadow:inset 0 1px 0 #fff1,0 8px 24px #0008}
 .biTop{display:flex;justify-content:space-between;gap:10px;font:900 11px var(--mono);letter-spacing:.12em;color:var(--amber);border-bottom:1px solid #ffffff12;padding-bottom:7px}.biTop span:last-child{color:var(--mut);font-size:9px}
 .biStats{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-top:8px}.biStats div{padding:7px 4px;background:#0c1114;border:1px solid #ffffff0b;border-radius:8px;text-align:center}.biStats b{display:block;font:900 18px var(--mono);color:var(--ink)}.biStats small{font:800 7px var(--mono);letter-spacing:.08em;color:var(--mut)}.biHint{margin-top:7px;font:800 8px var(--mono);letter-spacing:.08em;color:#71808a}
@@ -162,6 +166,15 @@ body kbd{transition:transform .15s,color .15s,border-color .15s}body kbd:hover{t
 #leaderboardPanel{margin:9px 0;padding:8px;border:1px solid #ffffff12;border-radius:8px;background:#091015aa}#globalLB{max-height:125px;overflow:auto;font:800 9px var(--mono)}.lbrow{display:grid;grid-template-columns:26px 1fr 70px 70px;gap:5px;padding:4px 0;border-bottom:1px solid #ffffff08}.lbrow.me{color:#ffcf5a}.lbrow .t{text-align:right}
 #musicChoices{display:flex;gap:5px;pointer-events:auto;margin-top:6px;position:relative;z-index:2}#musicChoices button{padding:5px 7px;font-size:8px;background:#111a20;color:#91a0a8;border:1px solid #ffffff12;border-radius:6px}#musicChoices button.on{background:#3fe0cf;color:#061311}
 @media(max-width:700px){#partsGrid{max-height:160px}.partCard{grid-template-columns:1fr}.partCard button{grid-row:auto}.lbrow{grid-template-columns:22px 1fr 54px 54px}.skillHead span,.shopHead span{display:none}}
+
+/* ===== FINAL STABILITY / SHOWROOM FIX ===== */
+#gl{z-index:0;background:#101820}
+#menu{z-index:20}
+#setupPanel,#modePanel{z-index:30}
+#settingsBtn{box-shadow:0 8px 24px #0008}
+#playBtn{position:relative;z-index:50;pointer-events:auto;cursor:pointer}
+#mload{display:none!important}
+#bikeChoices{position:relative;z-index:40}
 </style></head><body>
 
 <div id="leaveConfirm"><div class="leaveCard"><h2>ARE YOU SURE YOU WANT TO LEAVE?</h2><p>Your current ride will end and you will return to the main menu.</p><div class="leaveBtns"><button id="leaveYes" type="button">YES, LEAVE</button><button id="leaveNo" type="button">NO, STAY</button></div></div></div>
@@ -216,8 +229,8 @@ body kbd{transition:transform .15s,color .15s,border-color .15s}body kbd:hover{t
 let PLAYER_NICK='GUEST';
 window.PLAYER_PROFILE=null;
 const LOCAL_PROFILE_KEY='rr3dStandaloneGuestProfileV1';
-function makeGuestProfile(){return {username:'GUEST',money:500,skillPoints:0,wins:0,score:0,skills:{},ownedParts:[],ownedBikes:['default'],equipped:{}}}
-function readGuestProfile(){try{const p=JSON.parse(localStorage.getItem(LOCAL_PROFILE_KEY)||'null');if(!p)return makeGuestProfile();p.username='GUEST';p.skills=p.skills||{};p.equipped=p.equipped||{};p.ownedParts=p.ownedParts||[];p.ownedBikes=p.ownedBikes||['default'];p.money=Number(p.money??500);p.skillPoints=Number(p.skillPoints||0);p.wins=Number(p.wins||0);p.score=Number(p.score||0);return p}catch(e){return makeGuestProfile()}}
+function makeGuestProfile(){return {username:'GUEST',money:500,skillPoints:0,wins:0,score:0,skills:{},ownedParts:[],ownedBikes:[0],equipped:{}}}
+function readGuestProfile(){try{const p=JSON.parse(localStorage.getItem(LOCAL_PROFILE_KEY)||'null');if(!p)return makeGuestProfile();p.username='GUEST';p.skills=p.skills||{};p.equipped=p.equipped||{};p.ownedParts=p.ownedParts||[];p.ownedBikes=Array.isArray(p.ownedBikes)?p.ownedBikes:[0];if(!p.ownedBikes.includes(0))p.ownedBikes.unshift(0);p.money=Number(p.money??500);p.skillPoints=Number(p.skillPoints||0);p.wins=Number(p.wins||0);p.score=Number(p.score||0);return p}catch(e){return makeGuestProfile()}}
 function saveGuestProfile(p){window.PLAYER_PROFILE=p;try{localStorage.setItem(LOCAL_PROFILE_KEY,JSON.stringify(p))}catch(e){}}
 function renderProfile(){const p=window.PLAYER_PROFILE||readGuestProfile();PLAYER_NICK='GUEST';const n=$("accountName"),m=$("accountMoney"),s=$("accountSkill");if(n)n.textContent='GUEST';if(m)m.textContent='$'+Math.floor(Number(p.money||0));if(s)s.textContent='SKILL '+Object.values(p.skills||{}).reduce((a,v)=>a+Number(v||0),0);if(typeof updateSkillTree==='function')updateSkillTree();if(typeof renderParts==='function')renderParts('all');if(typeof updateBikeInfo==='function')updateBikeInfo()}
 async function api(path,opt={}){
@@ -227,7 +240,7 @@ async function api(path,opt={}){
   if(path==='/api/game/profile')return {user:p};
   if(path==='/api/game/skill'){
     const k=body.skill,cost=(k==='aero'||k==='speed')?2:1,lv=Number(p.skills[k]||0);
-    if(!['power','stamina','climb','cadence','aero','speed'].includes(k))throw new Error('Unknown skill.');
+    const keyMap={pow:'power',sta:'stamina',clb:'climb',cad:'cadence',aero:'aero',speed:'speed'};const kk=keyMap[k]||k;if(!['power','stamina','climb','cadence','aero','speed'].includes(kk))throw new Error('Unknown skill.');
     if(lv>=5)throw new Error('Skill already maxed.');if(Number(p.skillPoints||0)<cost)throw new Error('Not enough skill points.');
     p.skillPoints-=cost;p.skills[k]=lv+1;saveGuestProfile(p);return {user:p};
   }
@@ -239,7 +252,7 @@ async function api(path,opt={}){
     const x=PARTS.find(q=>q.id===body.itemId);if(!x||!p.ownedParts.includes(x.id))throw new Error('Part is not owned.');p.equipped=p.equipped||{};p.equipped[x.cat]=x.id;saveGuestProfile(p);return {user:p};
   }
   if(path==='/api/shop/buy-bike'){
-    const i=Number(body.index),B=BIKES[i];if(!B)throw new Error('Bike not found.');p.ownedBikes=p.ownedBikes||['default'];if(p.ownedBikes.includes(i))return {user:p};if(Number(p.money||0)<Number(B.cost||0))throw new Error('Not enough money.');p.money-=Number(B.cost||0);p.ownedBikes.push(i);saveGuestProfile(p);return {user:p};
+    const i=Number(body.index),B=BIKES[i];if(!B)throw new Error('Bike not found.');p.ownedBikes=Array.isArray(p.ownedBikes)?p.ownedBikes:[0];if(!p.ownedBikes.includes(0))p.ownedBikes.unshift(0);if(p.ownedBikes.includes(i))return {user:p};if(Number(p.money||0)<Number(B.cost||0))throw new Error('Not enough money.');p.money-=Number(B.cost||0);p.ownedBikes.push(i);saveGuestProfile(p);return {user:p};
   }
   if(path==='/api/game/complete'){
     const gain=Math.max(25,Math.min(5000,Math.floor(Number(body.score||0)/10)+Math.max(0,5-Number(body.place||5))*50));p.money=Number(p.money||0)+gain;if(Number(body.place||99)<=1){p.wins=Number(p.wins||0)+1;p.skillPoints=Number(p.skillPoints||0)+1}p.score=Math.max(Number(p.score||0),Math.floor(Number(body.score||0)));saveGuestProfile(p);return {user:p,reward:gain};
@@ -612,7 +625,7 @@ MODEL=base}
 function logo(a,b,t0,t1,xo,hh){if(rival)return;const L=Math.hypot(b[1]-a[1],b[2]-a[2]),ty=(b[1]-a[1])/L,tz=(b[2]-a[2])/L,c=lp(a,b,(t0+t1)/2),Lh=L*(t1-t0)/2;
 for(const q of[-1,1]){const m=I();m[0]=.0015;m[5]=-tz*hh;m[6]=ty*hh;m[9]=ty*Lh;m[10]=tz*Lh;m[12]=c[0]+q*xo;m[13]=c[1];m[14]=c[2];draw("box",m,[1,1,1],.5,4)}}
 function drawBike(){
-const BM=mul(trans(px,gy,pz),mul(ry(h),mul(rx(pitch),rz(lean+rock)))),FM=mul(trans(0,0,-.4),mul(ry(-dlt),trans(0,0,.4)));
+const showScale=menuOn?1.32:1;const BM=mul(trans(px,gy,pz),mul(scale(showScale,showScale,showScale),mul(ry(h),mul(rx(pitch),rz(lean+rock))))),FM=mul(trans(0,0,-.4),mul(ry(-dlt),trans(0,0,.4)));
 const fp=p=>{const a=-dlt,c=Math.cos(a),s=Math.sin(a),z=p[2]+.4;return[c*p[0]+s*z,p[1],-s*p[0]+c*z-.4]};
 const FRG=[[.83,.26,.80,-.38,.62,-.42],[.80,.27,.79,-.38,.60,-.43],[.84,.25,.81,-.37,.65,-.41],[.83,.26,.83,-.38,.64,-.42],[.78,.28,.76,-.37,.58,-.41],[.82,.26,.84,-.39,.60,-.42]][CUSTOM.frame]||[.83,.26,.80,-.38,.62,-.42];
 const RA=[0,R,.5],BB=[0,.28,.12],ST=[0,FRG[0],FRG[1]],HT=[0,FRG[2],FRG[3]],HB=[0,FRG[4],FRG[5]];
@@ -974,8 +987,8 @@ if(menuOn){
   lean=0;pitch=0;rock=0;spr=0;dlt=0;slip=0;v=0;
   gy=hgt(px,pz);
   // fixed 3/4 view from the side-front, bike rotates under it
-  const cd=4.2,ex=px+Math.sin(0.55)*cd,ez=pz+Math.cos(0.55)*cd;
-  camY=gy+1.5;eye=[ex,camY,ez];lookAt=[px,gy+.72,pz];
+  const cd=3.45,ex=px+Math.sin(0.55)*cd,ez=pz+Math.cos(0.55)*cd;
+  camY=gy+1.35;eye=[ex,camY,ez];lookAt=[px,gy+.78,pz];
 }else if(gm==="train"){
   const ang=h+1.15+camOff,cd=3.3,ex=px+Math.sin(ang)*cd,ez=pz+Math.cos(ang)*cd;camY=gy+1.1+camP*cd*1.3;eye=[ex,camY,ez];lookAt=[px,gy+.68,pz];
 }else{
@@ -983,8 +996,8 @@ if(menuOn){
   const ang=camH+camOff,cd=camD+Math.abs(v)*.04,ex=px+Math.sin(ang)*cd,ez=pz+Math.cos(ang)*cd;camY+=(Math.max(gy+.9,hgt(ex,ez)+.7)+camP*cd*1.6-camY)*(1-Math.exp(-6*dt));eye=[ex,camY,ez];lookAt=[px-Math.sin(h)*1.2,gy+.85,pz-Math.cos(h)*1.2];
 }
 const V=look(...eye,...lookAt);
-PV=mul(persp((menuOn?46:(58+Math.abs(v)*.7))*Math.PI/180,canvas.width/canvas.height,.1,3000),V);
-gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);gl.uniform3fv(ue,new Float32Array(eye));gl.uniform1f(utm,TM);gl.uniform1f(uday,env);gl.uniform1f(ungt,env===0&&mapId===1?1:0);gl.uniform1f(uhl,menuOn?0:(env?.55:(mapId===1?2.2:1.05)));gl.uniform3f(uhp,px-Math.sin(h)*.55,gy+.85,pz-Math.cos(h)*.55);gl.uniform3f(uhd,-Math.sin(h)*.99,-.12,-Math.cos(h)*.99);if(env){const S=ST[stg];gl.uniform4f(urd,S.A,S.k,S.B,S.k2);gl.uniform2f(urp,S.p1,S.p2);gl.uniform2f(urf,0,-S.len)}
+PV=mul(persp((menuOn?40:(58+Math.abs(v)*.7))*Math.PI/180,canvas.width/canvas.height,.1,3000),V);
+gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);gl.uniform3fv(ue,new Float32Array(eye));gl.uniform1f(utm,TM);gl.uniform1f(uday,menuOn?1:env);gl.uniform1f(ungt,menuOn?0:(env===0&&mapId===1?1:0));gl.uniform1f(uhl,menuOn?1.8:(env?.55:(mapId===1?2.2:1.05)));gl.uniform3f(uhp,px-Math.sin(h)*.55,gy+.85,pz-Math.cos(h)*.55);gl.uniform3f(uhd,-Math.sin(h)*.99,-.12,-Math.cos(h)*.99);if(env){const S=ST[stg];gl.uniform4f(urd,S.A,S.k,S.B,S.k2);gl.uniform2f(urp,S.p1,S.p2);gl.uniform2f(urf,0,-S.len)}
 gl.disable(gl.DEPTH_TEST);MODEL=trans(...eye);draw("sphere",scale(600,600,600),[0,0,0],0,2);gl.enable(gl.DEPTH_TEST);
 // Keep the start/menu screen lightweight: do not build the city, traffic, or terrain while the menu is open.
 if(!menuOn&&gm!=="train"){
@@ -992,15 +1005,15 @@ if(!menuOn&&gm!=="train"){
   if(!env){drawCity();drawCoast();drawTraffic(dt)}
 }else{
   // Simple floor so the bike has a stage under the menu UI
-  const g0=gy-((gm==="train"&&!menuOn)?.1:0);MODEL=I();draw("cyl",mul(trans(px,g0-.02,pz),scale(3.2,.015,3.2)),[.12,.14,.16],.08);
-  draw("cyl",mul(trans(px,g0-.01,pz),scale(1.6,.012,1.6)),[.18,.2,.22],.12);
+  const g0=gy-((gm==="train"&&!menuOn)?.1:0);MODEL=I();draw("cyl",mul(trans(px,g0-.02,pz),scale(3.2,.015,3.2)),[.16,.18,.21],.12);
+  draw("cyl",mul(trans(px,g0-.01,pz),scale(1.6,.012,1.6)),[.24,.26,.29],.16);
   if(gm==="train"&&!menuOn)drawRollers();
 }
 MODEL=I();for(const m of marks)if(Math.abs(m[0]-px)<70&&Math.abs(m[1]-pz)<70)draw("box",mul(trans(m[0],hgt(m[0],m[1])+.06,m[1]),mul(ry(m[2]),scale(.035,.004,.28))),[.015,.015,.017],.1);
 for(const q of puff){const s=(.06+.18*(1-q.l))*Math.min(1,q.l*4);ball([q.x,q.y,q.z],s,[.8,.78,.76],.05)}
 if(!menuOn)drawRivals();drawRemotes();drawBike();
 $("spd").textContent=(v<-.2?"-":"")+Math.round(Math.abs(v)*3.6);$("gear").textContent=CHAIN+"×"+COGS[gi];{const f=$("stamFill");f.style.width=Math.round(stam*100)+"%";f.style.background=tiredP?"#ff4a3a":(stam<.5&&!sprintOn)?"#ffb02e":stam<.35?"#ffb02e":"#3fe0cf";$("stamTxt").textContent=tiredP?"EXHAUSTED":(stam<.5&&!sprintOn)?"SPRINT AT 50%":"STAMINA"}$("cad").textContent="CADENCE "+Math.round(cad)+(skid?" · SKID":"")+(sprint?" · SPRINT":"")+(Math.abs(grade)>.01?" · "+(grade>0?"+":"")+Math.round(grade*100)+"%":"");
-env?alpsMap():minimap();requestAnimationFrame(loop)}catch(e){fail(e)}}
+env?alpsMap():minimap();requestAnimationFrame(loop)}catch(e){fail(e);requestAnimationFrame(loop)}}
 function resize(){const d=Math.min(devicePixelRatio||1,1.5)*qs;canvas.width=Math.max(1,Math.floor(innerWidth*d));canvas.height=Math.max(1,Math.floor(innerHeight*d));gl.viewport(0,0,canvas.width,canvas.height)}
 addEventListener("resize",resize);function startFree(){raceState=3;px=-33;pz=60;h=0;slip=0;v=0;st=0;lean=0;camH=0;camOff=0;crashT=0;invT=1;marks.length=0}
 const menu=$("menu");
@@ -1039,11 +1052,10 @@ function setMap(m){mapId=m;for(const[k,v]of blocks){gl.deleteBuffer(v.m.vb);gl.d
 document.querySelectorAll("#mmap button").forEach(b=>b.onclick=()=>setMap(+b.dataset.mp));
 document.querySelectorAll("#mdiff button").forEach(b=>b.onclick=()=>{diff=+b.dataset.d;document.querySelectorAll("#mdiff button").forEach(x=>x.classList.toggle("on",x===b))});
 // Ready immediately — bike setup first, world loads when a mode starts
-$("mload").style.display="none";$("bari").style.width="100%";renderParts();updateSkillTree();
+$("mload").style.display="none";$("bari").style.width="100%";renderProfile();renderProfile();renderParts();updateSkillTree();
 $("bikes").style.display="none";hideHUD();applySettingsUI();showSetup();
 resize();startFree();requestAnimationFrame(loop);
 }catch(e){fail(e)}
 })();
-</script><script async src="/.netlify/scripts/ar" data-netlify-deploy-id="6ac466bba1523f8e1dcd8586" data-netlify-site-id="bfd5c14f-a486-41fb-b5f5-d281475d9318" data-agent-runner-id="6ac4647cb6bda00b4299b50d"></script>
+</script>
 </body></html>
-
