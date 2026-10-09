@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -967,7 +966,7 @@ const gKey="rr3dGuest";
 function loadGuest(){try{return fixProf(JSON.parse(localStorage.getItem(gKey)))}catch(e){return newProf()}}
 let svT=0;function saveSoon(){clearTimeout(svT);svT=setTimeout(saveNow,1500)}
 function captureBuild(){META.build={bi,c:[CUSTOM.frame,CUSTOM.fWheel,CUSTOM.rWheel,CUSTOM.bar,CUSTOM.fTire,CUSTOM.rTire]}}
-function saveNow(){if(!META)return;captureBuild();if(TOK){fetch("/api/save",{method:"PUT",headers:{"content-type":"application/json",authorization:"Bearer "+TOK},body:JSON.stringify({profile:META}),keepalive:true}).catch(()=>{})}else{try{localStorage.setItem(gKey,JSON.stringify(META))}catch(e){}}}
+function saveNow(){if(!META)return;captureBuild();if(TOK){api("save",{method:"PUT",headers:hdr(),body:JSON.stringify({profile:META}),keepalive:true}).catch(()=>{})}else{try{localStorage.setItem(gKey,JSON.stringify(META))}catch(e){}}}
 addEventListener("pagehide",saveNow);
 function metaOwn(k){return !META||META.owned.b.includes(k)}
 function metaBuyBike(k){openGarage("bikes");toast("🔒 Buy the "+BIKES[k].n+" in the garage")}
@@ -980,7 +979,7 @@ function updChip(){const e=$("uChip");if(e&&META)e.textContent=(USER?"👤 "+USE
 function toast(t){let e=$("toast");if(!e){e=document.createElement("div");e.id="toast";document.body.appendChild(e)}e.textContent=t;e.classList.add("on");clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove("on"),3400)}
 function award(m,sp,label){m=Math.round(m*PM.money);META.money+=m;META.sp+=sp;META.st.earned+=m;toast(label+" · +$"+m.toLocaleString()+(sp?" · +"+sp+" SP":""));updChip();saveSoon()}
 const hdr=()=>({"content-type":"application/json",authorization:"Bearer "+TOK});
-function submitTour(ms){if(!TOK){toast("Log in to enter the global Tour leaderboard");return}fetch("/api/tour",{method:"POST",headers:hdr(),body:JSON.stringify({ms})}).then(r=>r.json()).then(d=>{if(d.rank)setTimeout(()=>toast("🏆 Global Tour rank #"+d.rank),3600)}).catch(()=>{})}
+function submitTour(ms){if(!TOK){toast("Log in to enter the global Tour leaderboard");return}api("tour",{method:"POST",headers:hdr(),body:JSON.stringify({ms})}).then(d=>{if(d.rank)setTimeout(()=>toast("🏆 Global Tour rank #"+d.rank),3600)}).catch(()=>{})}
 function onFinish(){const S=META.st,d=diff;
 if(gm==="race"||gm==="trial"){S.races++;const p=rivalsOn?plPlace:1,race=gm==="race";if(race&&p===1)S.wins++;if(race&&p<=3)S.podiums++;award((race?[600,350,220,120,60][Math.min(p-1,4)]*(1+d*.5):200*(1+d*.3))*(race&&p===1?PM.win:1),race?(p===1?2:p<=3?1:0):0,race?"RACE P"+p:"TIME TRIAL")}
 else if(gm==="tour"){S.stages++;const p=plPlace;if(p===1)S.wins++;if(p<=3)S.podiums++;award(Math.max(50,Math.round(800/p))*(1+d*.4)*(p===1?PM.win:1),p===1?1:0,"STAGE "+(stg+1)+" P"+p);
@@ -995,7 +994,23 @@ pOver=over;pRS=raceState;if(pBi!==bi){pBi=bi;recalc();saveSoon()}}
 const BADW=["fuck","shit","bitch","cunt","dick","cock","pussy","whore","slut","bastard","asshole","nigg","fagg","retard","rape","nazi","hitler","porn","penis","vagina","kkk","jihad","admin","moderator","staff","system","anonymous","roadracer"];
 window.badName=function(n){const x=String(n).toLowerCase().replace(/[@4]/g,"a").replace(/3/g,"e").replace(/[1!|]/g,"i").replace(/0/g,"o").replace(/[$5]/g,"s").replace(/7/g,"t").replace(/[^a-z]/g,""),sq=t=>t.replace(/(.)\1+/g,"$1"),y=sq(x);return BADW.some(w=>x.includes(w)||y.includes(sq(w)))};
 // ---- auth
-async function api(path,opt){let r,d={};try{r=await fetch("/api/"+path,opt)}catch(e){throw new Error("Can't reach the server.")}try{d=await r.json()}catch(e){}if(!r.ok)throw new Error(d.error||(r.status===404?"Accounts aren't set up on this host yet.":"Server error ("+r.status+")"));return d}
+let LOCAL=false;
+const LS={get(k,d){try{return JSON.parse(localStorage.getItem(k))||d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const hex16=()=>[...crypto.getRandomValues(new Uint8Array(16))].map(x=>x.toString(16).padStart(2,"0")).join("");
+async function lhash(p,salt){if(window.crypto&&crypto.subtle){const k=await crypto.subtle.importKey("raw",new TextEncoder().encode(p),"PBKDF2",false,["deriveBits"]);return[...new Uint8Array(await crypto.subtle.deriveBits({name:"PBKDF2",hash:"SHA-256",salt:new TextEncoder().encode(salt),iterations:100000},k,256))].map(x=>x.toString(16).padStart(2,"0")).join("")}let h=2166136261;for(const c of salt+p){h^=c.charCodeAt(0);h=Math.imul(h,16777619)}return"w"+(h>>>0).toString(16)}
+async function localApi(path,opt){const[p,q]=path.split("?"),b=opt.body?JSON.parse(opt.body):{},U=LS.get("rr3dUsers",{}),S=LS.get("rr3dSess",{}),tok=((opt.headers||{}).authorization||"").replace(/^Bearer /,""),okN=n=>/^[A-Za-z0-9_]{3,16}$/.test(n),start=l=>{const t=hex16()+hex16();S[t]=l;LS.set("rr3dSess",S);return t};
+if(p==="check"){const u=decodeURIComponent((q||"").replace(/^u=/,"")).trim();if(!okN(u))return{ok:false,why:"3–16 letters, numbers or _"};if(window.badName(u))return{ok:false,why:"Name not allowed"};return U[u.toLowerCase()]?{ok:false,why:"Already taken"}:{ok:true,why:"Available"}}
+if(p==="register"){const u=String(b.u||"").trim(),pw=String(b.p||""),l=u.toLowerCase();if(!okN(u))throw new Error("Username must be 3–16 letters, numbers or _.");if(window.badName(u))throw new Error("That username isn't allowed.");if(pw.length<6||pw.length>64)throw new Error("Password must be 6–64 characters.");if(U[l])throw new Error("That username is already taken.");const salt=hex16();U[l]={name:u,salt,hash:await lhash(pw,salt),profile:b.profile||{},fails:0,lock:0};LS.set("rr3dUsers",U);return{token:start(l),user:u,profile:U[l].profile}}
+if(p==="login"){const l=String(b.u||"").trim().toLowerCase(),r=U[l];if(!r)throw new Error("Wrong username or password.");if(r.lock>Date.now())throw new Error("Too many attempts. Try again in a minute.");if((await lhash(String(b.p||""),r.salt))!==r.hash){r.fails++;if(r.fails>=5){r.fails=0;r.lock=Date.now()+60000}LS.set("rr3dUsers",U);throw new Error("Wrong username or password.")}r.fails=0;LS.set("rr3dUsers",U);return{token:start(l),user:r.name,profile:r.profile}}
+if(p==="logout"){delete S[tok];LS.set("rr3dSess",S);return{ok:true}}
+if(p==="leaderboard")return{rows:LS.get("rr3dBoard",[]).slice().sort((x,y)=>x.ms-y.ms).slice(0,25)};
+const l=S[tok];if(!l||!U[l])throw new Error("Not signed in.");
+if(p==="me")return{user:U[l].name,profile:U[l].profile};
+if(p==="save"){U[l].profile=b.profile||{};LS.set("rr3dUsers",U);return{ok:true}}
+if(p==="tour"){const ms=Math.round(Number(b.ms));if(!(ms>=200000&&ms<=7200000))throw new Error("Invalid time.");const bd=LS.get("rr3dBoard",[]);let e=bd.find(x=>x.name===U[l].name);if(!e)bd.push(e={name:U[l].name,ms});else e.ms=Math.min(e.ms,ms);bd.sort((x,y)=>x.ms-y.ms);LS.set("rr3dBoard",bd);return{ok:true,rank:bd.findIndex(x=>x.name===U[l].name)+1}}
+throw new Error("Not found")}
+// Uses the server API when this page is hosted with one (worker.js); otherwise falls back to accounts stored in this browser.
+async function api(path,opt){opt=opt||{};if(!LOCAL){try{const r=await fetch("/api/"+path,opt);let d=null;try{d=await r.json()}catch(e){}if(d!==null){if(!r.ok)throw new Error(d.error||"Server error ("+r.status+")");return d}LOCAL=true}catch(e){if(e instanceof TypeError)LOCAL=true;else throw e}}return localApi(path,opt)}
 function setUser(name,tok,prof){USER=name;TOK=tok;try{localStorage.setItem("rr3dTok",tok)}catch(e){}META=fixProf(prof);PLAYER_NICK=name;try{hideNicknameGate()}catch(e){}$("authGate").style.display="none";const n=$("nick");if(n){n.value=name;n.readOnly=true}applyBuild();pBi=-1;updChip()}
 let aMode="login",aT=0;
 function setAuth(m){aMode=m;document.querySelectorAll("#authGate .atabs button").forEach(b=>b.classList.toggle("on",b.dataset.m===m));$("auP2").style.display=m==="reg"?"block":"none";$("auGo").textContent=m==="reg"?"CREATE ACCOUNT":"LOG IN";$("auP").autocomplete=m==="reg"?"new-password":"current-password";$("auErr").textContent="";$("auHint").textContent="";$("auMsg").textContent=m==="reg"?"Your current bike, money and parts carry over to the new account":"Log in to save progress and join the global ranking"}
@@ -1021,8 +1036,8 @@ else if(gTab==="parts")h=SLOTS.map(sl=>"<h4>"+sl[1].toUpperCase()+"</h4><div cla
 else if(gTab==="skills")h="<p class='gn'>Earn skill points (SP) by winning and placing in races and finishing the Tour.</p><div class='gg'>"+SK.map(n=>{const lv=M.sk[n[0]]||0,rq=n[4],ok=!rq||(M.sk[rq[0]]||0)>=rq[1],can=ok&&lv<n[3]&&M.sp>=1;return"<div class='gc'><b>"+n[1]+" <em>"+lv+"/"+n[3]+"</em></b><small>"+n[2]+(rq&&!ok?"<br>Needs "+SK.find(x=>x[0]===rq[0])[1]+" "+rq[1]:"")+"</small><div class='pips'>"+"<u class='on'></u>".repeat(lv)+"<u></u>".repeat(n[3]-lv)+"</div><button data-a='skill' data-id='"+n[0]+"' "+(can?"":"disabled")+" type='button'>"+(lv>=n[3]?"MAXED":"+1 LEVEL · 1 SP")+"</button></div>"}).join("")+"</div>";
 else if(gTab==="stats"){const R=[["Races",S.races],["Wins",S.wins],["Podiums",S.podiums],["Tours finished",S.tours],["Tour stages",S.stages],["Distance",(S.dist/1000).toFixed(1)+" km"],["Top speed",S.top.toFixed(0)+" km/h"],["Money earned","$"+S.earned.toLocaleString()],["Crashes",S.crashes],["Play time",Math.floor(S.play/60)+" min"],["Best Tour",S.best?fmtMs(S.best):"—"]],Q=[["Top speed",pc(PM.top-1)],["Acceleration",pc(PM.acc-1)],["Air drag",pc(PM.drag-1)],["Hill drag",pc(PM.hill-1)],["Steering grip",pc(PM.grip-1)],["Stamina drain",pc(PM.sdr-1)],["Recovery",pc(PM.rec-1)],["Prize money",pc(PM.money-1)]];
 h="<div class='gg'><div class='gc'><b>CAREER</b>"+R.map(r=>"<div class='kv'><span>"+r[0]+"</span><span>"+r[1]+"</span></div>").join("")+"</div><div class='gc'><b>YOUR BIKE MODIFIERS</b>"+Q.map(r=>"<div class='kv'><span>"+r[0]+"</span><span>"+r[1]+"</span></div>").join("")+"</div></div>"}
-else if(gTab==="ranks"){h="<p class='gn'>Global best Tour de France total times.</p><div id='rk'>Loading…</div>";api("leaderboard").then(d=>{if(gTab!=="ranks"||!$("rk"))return;$("rk").innerHTML=d.rows.length?d.rows.map((r,i)=>"<div class='kv"+(r.name===USER?" me":"")+"'><span>"+(i+1)+". "+esc(r.name)+"</span><span>"+fmtMs(r.ms)+"</span></div>").join(""):"No times yet — be the first!"}).catch(e=>{if($("rk"))$("rk").textContent=e.message})}
-else h=USER?"<div class='gc'><b>Signed in as "+esc(USER)+"</b><small>Your progress is saved to your account.</small><button data-a='logout' type='button'>LOG OUT</button></div>":"<div class='gc'><b>Playing as guest</b><small>Progress is saved on this device only, and guests can't enter the global leaderboard. Creating an account keeps your current build, money and parts.</small><button data-a='reg' type='button'>CREATE ACCOUNT</button><button data-a='login' type='button'>LOG IN</button></div>";
+else if(gTab==="ranks"){h="<p class='gn' id='rkn'>Best Tour de France total times.</p><div id='rk'>Loading…</div>";api("leaderboard").then(d=>{if(gTab!=="ranks"||!$("rk"))return;$("rkn").textContent=LOCAL?"Leaderboard for this device. (Host the optional server for a global one.)":"Global best Tour de France total times.";$("rk").innerHTML=d.rows.length?d.rows.map((r,i)=>"<div class='kv"+(r.name===USER?" me":"")+"'><span>"+(i+1)+". "+esc(r.name)+"</span><span>"+fmtMs(r.ms)+"</span></div>").join(""):"No times yet — be the first!"}).catch(e=>{if($("rk"))$("rk").textContent=e.message})}
+else h=USER?"<div class='gc'><b>Signed in as "+esc(USER)+"</b><small>"+(LOCAL?"Saved in this browser. Clearing site data removes it.":"Your progress is saved to your account.")+"</small><button data-a='logout' type='button'>LOG OUT</button></div>":"<div class='gc'><b>Playing as guest</b><small>Progress is saved on this device only, and guests can't enter the global leaderboard. Creating an account keeps your current build, money and parts.</small><button data-a='reg' type='button'>CREATE ACCOUNT</button><button data-a='login' type='button'>LOG IN</button></div>";
 $("gBody").innerHTML=h}
 $("garage").addEventListener("click",e=>{const b=e.target.closest("button");if(!b||b.disabled)return;const M=META,a=b.dataset.a;if(b.dataset.t){gTab=b.dataset.t;return renderGarage()}
 if(a==="close")return closeGarage();
@@ -1143,3 +1158,4 @@ resize();startFree();requestAnimationFrame(loop);
 })();
 </script><script async src="/.netlify/scripts/ar" data-netlify-deploy-id="6ac466bba1523f8e1dcd8586" data-netlify-site-id="bfd5c14f-a486-41fb-b5f5-d281475d9318" data-agent-runner-id="6ac4647cb6bda00b4299b50d"></script>
 </body></html>
+
