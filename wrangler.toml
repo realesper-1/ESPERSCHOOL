@@ -1,6 +1,10 @@
 name = "road-racer-3d"
-pages_build_output_dir = "."
+main = "worker.js"
 compatibility_date = "2024-11-01"
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
 
 [[d1_databases]]
 binding = "DB"
